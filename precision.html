@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Check - Sumash Chandra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c5a9be;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #2e8b57;
+        }
+        #target, #counter {
+            font-size: 2em;
+            margin: 20px;
+            padding: 15px;
+            border: 2px solid #2e8b57;
+            border-radius: 10px;
+            background-color: #e6ffe6;
+            display: inline-block;
+        }
+        button {
+            font-size: 1.5em;
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2e8b57;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #245e40;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sumash Chandra Speed Check</h1>
+    <div id="target">Your time: </div>
+    <div id="counter">Count: </div>
+    <br>
+    <button id="startButton">Start Timer</button>
+    <button id="stopButton">Stop Timer</button>
+
+    <script>
+        let stopTime;
+
+        function recordTime() {
+            stopTime = Date.now();
+            console.log("Stop time recorded: " + stopTime);
+        }
+
+        document.getElementById("stopButton").onclick = recordTime;
+
+        function startTime() {
+            document.getElementById("target").innerHTML = "Your time: ";
+            let counterDisplay = document.getElementById("counter");
+            
+            for (let i = 0; i <= 4; i++) {
+                setTimeout(() => {
+                    counterDisplay.innerHTML = "Count: " + (4 - i);
+                }, (4 - i) * 1000);
+            }
+
+            setTimeout(() => {
+                if (stopTime === undefined) {
+                    document.getElementById("target").innerHTML = "Too Slow";
+                } else {
+                    let elapsedTime = Date.now() - stopTime;
+                    document.getElementById("target").innerHTML = "Time was " + elapsedTime + " ms";
+                }
+            }, 5000); 
+        }
+
+        document.getElementById("startButton").onclick = startTime;
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumash Chandra Builds List with Divs</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e3f2fd;
+            color: #1a237e;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #fff;
+        }
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+        .divlist {
+            padding: 15px;
+            margin: 5px;
+            background-color: #bbdefb;
+            border: 2px solid #0d47a1;
+            border-radius: 10px;
+            width: 150px;
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .divlist:hover {
+            transform: scale(1.05);
+        }
+        input {
+            padding: 10px;
+            width: 250px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 2px solid #0d47a1;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #0d47a1;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sumash Chandra Builds List with Divs</h1>
+    <input type="text" id="itemInput" placeholder="Enter item">
+    <div>
+        <button id="addEndButton">Add End</button>
+        <button id="addFrontButton">Add Front</button>
+        <button id="removeButton">Remove</button>
+    </div>
+    <div class="flex-container" id="flexContainer">
+        <div class="divlist">lucky <button class="swapButton">Swap</button></div>
+        <div class="divlist">rio <button class="swapButton">Swap</button></div>
+        <div class="divlist">pandu <button class="swapButton">Swap</button></div>
+    </div>
+
+    <script>
+        function addEnd() {
+            const inputValue = document.getElementById("itemInput").value;
+            if (inputValue) {
+                const newDiv = document.createElement("div");
+                newDiv.className = "divlist";
+                newDiv.innerHTML = inputValue + ' <button class="swapButton">Swap</button>';
+                document.getElementById("flexContainer").appendChild(newDiv);
+                document.getElementById("itemInput").value = "";
+                addSwapEvent(newDiv.querySelector(".swapButton"));
+            }
+        }
+
+        function addFront() {
+            const inputValue = document.getElementById("itemInput").value;
+            if (inputValue) {
+                const newDiv = document.createElement("div");
+                newDiv.className = "divlist";
+                newDiv.innerHTML = inputValue + ' <button class="swapButton">Swap</button>';
+                const container = document.getElementById("flexContainer");
+                container.insertBefore(newDiv, container.firstChild);
+                document.getElementById("itemInput").value = "";
+                addSwapEvent(newDiv.querySelector(".swapButton"));
+            }
+        }
+
+        function remove() {
+            const divListItems = document.getElementsByClassName("divlist");
+            const length = divListItems.length;
+            if (length > 0) {
+                divListItems[0].remove();
+            } else {
+                alert("No items to remove!");
+            }
+        }
+
+        function swap() {
+            const divListItems = document.getElementsByClassName("divlist");
+            const length = divListItems.length;
+            if (length < 2) {
+                alert("Need at least two items to swap!");
+                return;
+            }
+            let index1, index2;
+            do {
+                index1 = Math.floor(Math.random() * length);
+                index2 = Math.floor(Math.random() * length);
+            } while (index1 === index2);
+            const item1 = divListItems[index1];
+            const item2 = divListItems[index2];
+            if (index1 < index2) {
+                item1.parentNode.insertBefore(item2, item1.nextSibling);
+                item1.parentNode.insertBefore(item1, item2);
+            } else {
+                item1.parentNode.insertBefore(item1, item2.nextSibling);
+                item1.parentNode.insertBefore(item2, item1);
+            }
+        }
+
+        function addSwapEvent(button) {
+            button.onclick = swap;
+        }
+
+        document.getElementById("addEndButton").onclick = addEnd;
+        document.getElementById("addFrontButton").onclick = addFront;
+        document.getElementById("removeButton").onclick = remove;
+        
+        const existingSwapButtons = document.querySelectorAll(".swapButton");
+        existingSwapButtons.forEach(button => addSwapEvent(button));
+    </script>
+</body>
+</html>
