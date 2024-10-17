@@ -2,5 +2,5 @@
 # WebApps-F24-Assignment-7
 Assignment 7 on DOM
 Hosted at [Safari Game](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Bandaru-Sumash-Chandra/safari.html)
-Hosted at [precision Game](https://github.com/44-563-WebApps-F24/44563-webapps-f24-assignment7-Bandaru-Sumash-Chandra/precision.html)
-Hosted at [divlist Game](https://github.com/44-563-WebApps-F24/44563-webapps-f24-assignment7-Bandaru-Sumash-Chandra/divlist.html)
+Hosted at [precision Game](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Bandaru-Sumash-Chandra/precision.html)
+Hosted at [divlist Game](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Bandaru-Sumash-Chandra/divlist.html)
