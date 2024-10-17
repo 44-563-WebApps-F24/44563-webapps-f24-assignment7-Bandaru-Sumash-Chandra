@@ -74,11 +74,12 @@
         <button id="addEndButton">Add End</button>
         <button id="addFrontButton">Add Front</button>
         <button id="removeButton">Remove</button>
+        <button onclick="swap()">Swap</button>
     </div>
     <div class="flex-container" id="flexContainer">
-        <div class="divlist">lucky <button class="swapButton">Swap</button></div>
-        <div class="divlist">rio <button class="swapButton">Swap</button></div>
-        <div class="divlist">pandu <button class="swapButton">Swap</button></div>
+        <div class="divlist">lucky</div>
+        <div class="divlist">rio </div>
+        <div class="divlist">pandu </div>
     </div>
 
     <script>
@@ -87,10 +88,9 @@
             if (inputValue) {
                 const newDiv = document.createElement("div");
                 newDiv.className = "divlist";
-                newDiv.innerHTML = inputValue + ' <button class="swapButton">Swap</button>';
+                newDiv.innerHTML = inputValue    ;
                 document.getElementById("flexContainer").appendChild(newDiv);
                 document.getElementById("itemInput").value = "";
-                addSwapEvent(newDiv.querySelector(".swapButton"));
             }
         }
 
@@ -99,11 +99,10 @@
             if (inputValue) {
                 const newDiv = document.createElement("div");
                 newDiv.className = "divlist";
-                newDiv.innerHTML = inputValue + ' <button class="swapButton">Swap</button>';
+                newDiv.innerHTML = inputValue  ;
                 const container = document.getElementById("flexContainer");
                 container.insertBefore(newDiv, container.firstChild);
                 document.getElementById("itemInput").value = "";
-                addSwapEvent(newDiv.querySelector(".swapButton"));
             }
         }
 
@@ -118,38 +117,37 @@
         }
 
         function swap() {
-            const divListItems = document.getElementsByClassName("divlist");
-            const length = divListItems.length;
-            if (length < 2) {
-                alert("Need at least two items to swap!");
-                return;
-            }
-            let index1, index2;
-            do {
-                index1 = Math.floor(Math.random() * length);
-                index2 = Math.floor(Math.random() * length);
-            } while (index1 === index2);
-            const item1 = divListItems[index1];
-            const item2 = divListItems[index2];
-            if (index1 < index2) {
-                item1.parentNode.insertBefore(item2, item1.nextSibling);
-                item1.parentNode.insertBefore(item1, item2);
-            } else {
-                item1.parentNode.insertBefore(item1, item2.nextSibling);
-                item1.parentNode.insertBefore(item2, item1);
-            }
-        }
+    let divListItems = document.getElementsByClassName("divlist");
+    if (divListItems.length < 2) return; 
 
-        function addSwapEvent(button) {
-            button.onclick = swap;
-        }
+    let index1 = Math.floor(Math.random()*divListItems.length);
+    let index2;
+
+    do {
+      index2 = Math.floor(Math.random()*divListItems.length);
+    } while (index1 === index2);
+
+    let item1 = divListItems[index1];
+    let item2 = divListItems[index2];
+
+    let container = document.getElementById("flexContainer");
+    
+    item1.remove();
+    item2.remove();
+    
+    if (index1 < index2) {
+      container.insertBefore(item1, divListItems[index2]);
+      container.insertBefore(item2, divListItems[index1]);
+    } else {
+      container.insertBefore(item2, divListItems[index1]);
+      container.insertBefore(item1, divListItems[index2]);
+    }
+  }
 
         document.getElementById("addEndButton").onclick = addEnd;
         document.getElementById("addFrontButton").onclick = addFront;
         document.getElementById("removeButton").onclick = remove;
         
-        const existingSwapButtons = document.querySelectorAll(".swapButton");
-        existingSwapButtons.forEach(button => addSwapEvent(button));
     </script>
 </body>
 </html>
